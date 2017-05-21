@@ -81,7 +81,3 @@ var throttle = function (fn,interval) {
     },interval||500)
   }
 }
-
-window.onresize = throttle(function () {
-  console.log(1);
-},500)
