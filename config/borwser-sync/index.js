@@ -14,5 +14,5 @@ module.exports = {
   //不显示在浏览器中的任何通知。
   notify: false,
   scrollProportionally: true, //视口同步到顶部位置
-  browser: ["chrome"]
+  browser: ["chrome","google-chrome"]
 }
