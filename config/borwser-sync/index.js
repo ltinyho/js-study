@@ -4,11 +4,11 @@ module.exports = {
   // 使用本地主机地址或ip
   //proxy: "www.kyy.com",
   // 起始路径
-  //startPath: "/knew/pc",
+  // startPath: "",
   // 监控的文件
   server: {
-    baseDir: "src/",
-    index: "index.html"
+    baseDir: "./",
+    index: "src/index.html"
   },
   files:watchFiles,
   //不显示在浏览器中的任何通知。

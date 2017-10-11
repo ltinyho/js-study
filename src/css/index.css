@@ -1,3 +1,36 @@
-body{
+body {
+    background-color: #f3f5f7;
+}
+.c {
+    width: 200px;
+    height: 400px;
+    margin: 0 auto;
+    overflow-y: auto;
     background-color: green;
+    padding-top: 30px;
+    float: left;
+}
+.u {
+    position: relative;
+    background-color: red;
+}
+.l {
+    position: relative;
+    background-color: yellow;
+    height: 60px;
+    margin-bottom: 10px;
+}
+#ss {
+    padding: 10px;
+    margin: 30px;
+    border:5px solid #000;
+}
+.u-ctrl{
+    float: left;
+    margin-left: 20px;
+    width: 100px;
+}
+.ctrl{
+    background-color: orange;
+    margin-bottom: 10px;
 }

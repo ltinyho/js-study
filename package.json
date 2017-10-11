@@ -4,14 +4,16 @@
   "description": "- 设置监听文件路径：config/browser-sync/watchFiles.js",
   "main": "gulpfile.js",
   "dependencies": {
-    "gulp": "^3.9.1"
+    "bootstrap": "^3.3.7",
+    "gulp": "^3.9.1",
+    "resetcss": "^1.0.3"
   },
   "devDependencies": {
     "browser-sync": "^2.18.11",
     "gulp": "^3.9.1"
   },
   "scripts": {
-    "gulp":"gulp"
+    "gulp": "gulp"
   },
   "repository": {
     "type": "git",

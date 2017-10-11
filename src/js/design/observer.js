@@ -6,10 +6,8 @@
 
 
 document.body.addEventListener('click', function () {
-  alert(2);
 })
 document.body.addEventListener('click', function () {
-  alert(3);
 })
 var Event = (function () {
   var clientList = {},
@@ -57,7 +55,6 @@ var Event = (function () {
 })()
 
 Event.listen('haha',function (data) {
-  console.log(data);
 })
 Event.trigger('haha',[1,2,3]);
 

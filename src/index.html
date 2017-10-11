@@ -6,11 +6,73 @@
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>js</title>
-  <link rel="stylesheet" href="./css/index.css">
+  <link rel="stylesheet" href="./node_modules/_bootstrap@3.3.7@bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="./node_modules/resetcss/reset.css">
+  <link rel="stylesheet" href="src/css/index.css">
+  <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+
 </head>
 <body>
+<div id="c" class="c">
+  <ul class="u">
+    <li id="l_1" class="l">1</li>
+    <li id="l_2" class="l">2</li>
+    <li id="l_3" class="l">3</li>
+    <li id="l_4" class="l">4</li>
+    <li id="l_5" class="l">5</li>
+    <li id="l_6" class="l">6</li>
+    <li id="l_7" class="l">7</li>
+    <li id="l_8" class="l">8</li>
+    <li id="l_9" class="l">9</li>
+    <li id="l_10" class="l">10</li>
+  </ul>
+</div>
+<ul class="u-ctrl">
+  <li class="ctrl">1</li>
+  <li></li>
+  <li class="ctrl">2</li>
+  <li class="ctrl">3</li>
+  <li class="ctrl">4</li>
+  <li class="ctrl">5</li>
+  <li class="ctrl">6</li>
+  <li class="ctrl">7</li>
+  <li class="ctrl">8</li>
+  <li class="ctrl">9</li>
+  <li class="ctrl">10</li>
+</ul>
 </body>
+<script>
 
-<script src="./js/index.js"></script>
-<script src="./js/design/observer.js"></script>
+  function c(res) {
+    console.log(res)
+  }
+
+  /*
+    c($('.c').height())
+    c($(document).height())
+    c($(window).height())
+    c($('body').height())
+    c($('body').outerHeight())*/
+
+  /* c($('#ss').height()) // height
+   c($('#ss').innerHeight()) // height +padding
+   c($('#ss').outerHeight()) // height + padding + border
+   c($('#ss').outerHeight(true))// height + padding+border+margin*/
+
+  $('.ctrl').click(function (event) {
+    var index = $(this).index('.ctrl')
+    var index1 = $('.ctrl').index(this)
+    var index2= $(this).index()
+    console.log(index)
+    console.log(index1)
+    console.log(index2)
+    var ptop = $('.l').eq(index).position().top
+    c(ptop)
+    $('#c').animate({
+      scrollTop: ptop
+    },200)
+  })
+</script>
+<script src="./src/js/index.js"></script>
+<script src="./src/js/design/observer.js"></script>
 </html>
