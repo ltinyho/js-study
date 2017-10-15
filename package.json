@@ -5,7 +5,11 @@
   "main": "gulpfile.js",
   "dependencies": {
     "bootstrap": "^3.3.7",
+    "browser-sync": "^2.18.13",
     "gulp": "^3.9.1",
+    "highlight.js": "^9.12.0",
+    "marked": "^0.3.6",
+    "progress": "^2.0.0",
     "resetcss": "^1.0.3"
   },
   "devDependencies": {
