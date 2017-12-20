@@ -78,9 +78,9 @@ function LinkedList() {
 
   this.toString = function () {
     let current = head;
-    let arr= []
+    let arr     = [];
     while (current) {
-      arr.push(current.value)
+      arr.push(current.value);
       current = current.next;
     }
     return arr.toString();
@@ -107,7 +107,94 @@ myList.append(88);
 myList.append(4);
 myList.append(42);
 myList.insert(0, 77);
-myList.print();
-console.log(myList.indexOf(42));
-console.log(myList.toString());
 
+// myList.print();
+
+function DoubleNode(value) {
+  this.value = value;
+  this.prev  = null;
+  this.next  = null;
+}
+
+function DoubleLinkedList() {
+  let head   = null,
+      tail   = null,
+      length = 0;
+
+  this.append = function (val) {
+    const node = new DoubleNode(val);
+    if (head === null) {
+      head = node;
+      tail = node;
+    } else {
+      let current = head;
+      while (current.next) {
+        current = current.next;
+      }
+
+      current.next = node;
+      node.prev    = current;
+      tail         = node;
+    }
+    length++;
+    return node;
+
+  };
+
+  this.insert = function (pos, val) {
+    const node = new DoubleNode(val);
+    if (pos >= 0 && pos <= length) {
+      if (pos === 0) {
+        if (head === null) {
+          head = node;
+          tail = node;
+        } else {
+          head.prev = node;
+          node.next = head;
+          head      = node;
+        }
+
+      } else if (pos === length) {
+        tail.next = node;
+        node.prev = tail;
+        tail      = node;
+      } else {
+        let current = head, previous = null, index = 0;
+        while (index++ < pos) {
+          previous = current;
+          current  = current.next;
+        }
+        previous.next = node;
+        node.prev     = previous;
+        node.next     = current;
+        current.prev  = node;
+      }
+      length++;
+      return true;
+    } else {
+      return false;
+    }
+
+  };
+
+  this.removeAt = function (pos) {
+
+  };
+
+  this.indexOf = function (val) {
+
+  };
+
+  this.print = function () {
+    let current = head;
+    while (current) {
+      console.log(current.value);
+      current = current.next;
+    }
+  };
+}
+
+var doubleLink = new DoubleLinkedList();
+doubleLink.append(4);
+doubleLink.insert(1, 10);
+doubleLink.print();
