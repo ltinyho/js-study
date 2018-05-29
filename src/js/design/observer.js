@@ -1,60 +1,87 @@
 /**
- * User: LiuZiHao/951919064@qq.com
- * Date: 2017/5/24 21:20
- * Desc: 观察者模式
+ *  观察者模式和发布订阅模式
+ * @file: observer.js
+ * @author: LiuZiHao/ltinyho@gmail.com
+ * Date: 2018/5/29 下午10:03
  */
 
+function Subject() {
+  this.subs = {};
+}
 
-document.body.addEventListener('click', function () {
-})
-document.body.addEventListener('click', function () {
-})
-var Event = (function () {
-  var clientList = {},
-      listen,
-      trigger,
-      remove;
-
-  listen = function (key, fn) {
-    if ( !clientList[key] ) {
-      clientList[key] = [];
-    }
-    clientList[key].push(fn); // 订阅的消息添加进缓存列表
+Subject.prototype.notify = function (subject, what) {
+  if (this.subs[subject]) {
+    this.subs[subject].forEach(sub => {
+      sub.update(what);
+    });
+  } else {
+    console.log(`没有 ${subject} 主题`);
   }
+};
 
-  trigger = function () {
-    var key = Array.prototype.shift.call(arguments), // (1);
-        fns = clientList[key];
-    if ( !fns || fns.length === 0 ) { // 如果没有绑定对应的消息
-      return false;
-    }
-    for ( var i = 0, fn; fn = fns[i++]; ) {
-      fn.apply(this, arguments); // (2) // arguments 是trigger 时带上的参数
-    }
+Subject.prototype.add = function (subject, watch) {
+  if (!this.subs[subject]) {
+    this.subs[subject] = [];
   }
+  this.subs[subject].push(watch);
+};
 
-  remove = function (key, fn) {
-    var fns = clientList[key];
-    if ( !fns )return false; // 如果key 对应的消息没有被人订阅，则直接返回
-    if ( !fn ) {
-      fns && (fns.length == 0);// 如果没有传入具体的回调函数，表示需要取消key 对应消息的所有订阅
+function Watcher() {
+}
+
+Watcher.prototype.update = function (what) {
+  console.log(what);
+};
+
+const Sub = new Subject();
+const cat = new Watcher();
+const dog = new Watcher();
+Sub.add('click', cat);
+Sub.add('dog', dog);
+Sub.notify('click', 'haha');
+Sub.notify('dog', 'dog');
+Sub.notify('dbggog');
+
+function EventBus() {
+  this.subs = {};
+}
+
+EventBus.prototype = {
+  construct: EventBus,
+  on: function (subject, callback) {
+    if (!this.subs[subject]) {
+      this.subs[subject] = [];
+    }
+    this.subs[subject].push(callback);
+  },
+  off: function (subject, callback) {
+    if (callback === null) {
+      this.subs[subject] = [];
     } else {
-      for ( var l = fns.length - 1; l >= 0; l-- ) {
-        if ( fns[l] === fn ) {
-          fns.splice(l, 1);// 删除订阅者的回调函数
-        }
-      }
+      this.subs[subject] = this.subs[subject].filter(cb => cb !== callback);
     }
-  }
+  },
+  emit: function (subject, data) {
+    process.nextTick(() => {
+      if (!this.subs[subject]) return false;
+      this.subs[subject].forEach(cb => cb(data));
+    });
+  },
+};
 
-  return {
-    listen:listen,
-    trigger:trigger,
-    remove:remove
-  }
-})()
+var eb = new EventBus();
+eb.on('click', function () {
+  console.log('click');
+});
 
-Event.listen('haha',function (data) {
-})
-Event.trigger('haha',[1,2,3]);
+eb.emit('click');
 
+eb.emit('haha', { name: 'lzh' });
+eb.on('haha', function (data) {
+  console.log(`${data.name}在笑`);
+});
+const cb = function (data) {
+  console.log(`${data.name}在1笑`);
+};
+eb.on('haha', cb);
+eb.off('haha', cb);
